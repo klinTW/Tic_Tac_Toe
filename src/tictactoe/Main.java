@@ -1,20 +1,24 @@
 package tictactoe;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.io.PrintStream;
 
 public class Main {
 
-    private static PrintStream myPrintStream;
-    private static Board myBoard;
-    private static Game myGame;
-    private static Player myPlayer1;
+    private static PrintStream printStream;
+    private static BufferedReader reader;
+    private static Board board;
+    private static Game game;
+    private static Player player1;
 
     public static void main (String[] args) {
-        myPrintStream = new PrintStream(System.out);
-        myBoard = new Board(myPrintStream);
-        myPlayer1 = new Player(myPrintStream);
-        myGame = new Game(myBoard, myPlayer1);
+        printStream = new PrintStream(System.out);
+        reader = new BufferedReader(new InputStreamReader(System.in));
+        board = new Board(printStream);
+        player1 = new Player(printStream, reader);
+        game = new Game(board, player1);
 
-        myGame.start();
+        game.start();
     }
 }
