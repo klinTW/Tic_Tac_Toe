@@ -12,14 +12,18 @@ public class Main {
     private static Game game;
     private static Player player1;
     private static BoardDisplayer displayer;
+    private static Player player2;
+    private static Integer playerNumber1 = 1;
+    private static Integer playerNumber2 = 2;
 
     public static void main (String[] args) {
         printStream = new PrintStream(System.out);
         reader = new BufferedReader(new InputStreamReader(System.in));
         displayer = new BoardDisplayer(printStream);
-        board = new Board(displayer);
-        player1 = new Player(printStream, reader);
-        game = new Game(board, player1);
+        board = new Board(displayer, printStream);
+        player1 = new Player(printStream, reader, playerNumber1);
+        player2 = new Player(printStream, reader, playerNumber2);
+        game = new Game(board, player1, player2);
 
         game.start();
     }

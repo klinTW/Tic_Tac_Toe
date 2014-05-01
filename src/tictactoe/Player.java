@@ -8,10 +8,12 @@ public class Player {
 
     private java.io.PrintStream printStream;
     private BufferedReader reader;
+    private Integer playerNumber;
 
-    public Player(PrintStream printStream, BufferedReader reader) {
+    public Player(PrintStream printStream, BufferedReader reader, Integer playerNumber) {
         this.printStream = printStream;
         this.reader = reader;
+        this.playerNumber = playerNumber;
     }
 
     public Integer askForMove() {
@@ -32,11 +34,20 @@ public class Player {
         }
     }
 
-    public Integer[] playMove(Integer i, Integer[] board) {
-        if (i > 0) {
-            board[i - 1] = 1;
+    public Integer[] playMove(Integer move, Integer[] board) {
+        Integer[] newBoard = new Integer[9];
+        for (int i = 0; i < 9; i++) {
+            if (i == move-1 && board[i] != 0) {
+                return board;
+            }
+            newBoard[i] = board[i];
         }
 
-        return board;
+        if (move > 0 && move < 9) {
+            newBoard[move - 1] = playerNumber;
+        }
+
+
+        return newBoard;
     }
 }

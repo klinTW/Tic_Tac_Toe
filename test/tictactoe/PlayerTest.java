@@ -18,6 +18,7 @@ import static org.mockito.Mockito.when;
 public class PlayerTest {
 
     private Player testPlayer;
+    private Player testPlayer2;
     private PrintStream printStream;
     private BufferedReader reader;
 
@@ -25,7 +26,8 @@ public class PlayerTest {
     public void setUp() {
         printStream = mock(PrintStream.class);
         reader = mock(BufferedReader.class);
-        testPlayer = new Player(printStream, reader);
+        testPlayer = new Player(printStream, reader, 1);
+        testPlayer2 = new Player(printStream, reader, 2);
     }
 
     @Test
@@ -59,6 +61,21 @@ public class PlayerTest {
         Integer[] board = new Integer[9];
         Arrays.fill(board, 0);
         assertArrayEquals(testPlayer.playMove(-1, board), board);
+    }
+
+    @Test
+    public void shouldModifyBoardWith2sWhenPlayer2IsPlaying() {
+        Integer[] board = new Integer[9];
+        Arrays.fill(board, 0);
+        Integer[] finalBoard = {2, 0, 0, 0, 0, 0, 0, 0, 0};
+        assertArrayEquals(testPlayer2.playMove(1, board), finalBoard);
+    }
+
+    @Test
+    public void shouldNotModifyBoardIfSpaceIsAlreadyTaken() {
+        Integer[] board = {1, 0, 0, 0, 0, 0, 0, 0, 0};
+        assertArrayEquals(testPlayer.playMove(1, board), board);
+        assertArrayEquals(testPlayer2.playMove(1, board), board);
     }
 
 }

@@ -21,13 +21,13 @@ public class BoardDisplayerTest {
     }
 
     @Test
-    public void shouldPrintGivenBoard() {
-        Integer[] board = {0, 0, 0, 0, 0, 0, 0, 0, 0};
+    public void shouldPrintBoard() {
+        Integer[] board = {0, 1, 0, 0, 2, 0, 0, 0, 0};
         testDisplayer.displayBoard(board);
         InOrder inOrder = inOrder(printStream);
-        inOrder.verify(printStream).println(" | | ");
+        inOrder.verify(printStream).println(" |X| ");
         inOrder.verify(printStream).println("-----");
-        inOrder.verify(printStream).println(" | | ");
+        inOrder.verify(printStream).println(" |O| ");
         inOrder.verify(printStream).println("-----");
         inOrder.verify(printStream).println(" | | ");
     }

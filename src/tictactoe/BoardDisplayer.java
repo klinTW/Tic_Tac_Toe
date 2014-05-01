@@ -3,7 +3,7 @@ package tictactoe;
 import java.io.PrintStream;
 
 public class BoardDisplayer {
-    Character[] symbols = {' ', 'X'};
+    Character[] symbols = {' ', 'X', 'O'};
     private PrintStream printStream;
 
     public BoardDisplayer(PrintStream printStream) {
