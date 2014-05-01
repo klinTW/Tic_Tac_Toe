@@ -11,8 +11,6 @@ public class Game {
     }
 
     public void start() {
-        gameBoard.displayBoard();
-        Integer move = player1.askForMove();
-        gameBoard.playMove(player1, move);
+        gameBoard.playTurn(player1);
     }
 }

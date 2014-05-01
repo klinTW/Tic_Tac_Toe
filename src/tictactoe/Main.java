@@ -11,11 +11,13 @@ public class Main {
     private static Board board;
     private static Game game;
     private static Player player1;
+    private static BoardDisplayer displayer;
 
     public static void main (String[] args) {
         printStream = new PrintStream(System.out);
         reader = new BufferedReader(new InputStreamReader(System.in));
-        board = new Board(printStream);
+        displayer = new BoardDisplayer(printStream);
+        board = new Board(displayer);
         player1 = new Player(printStream, reader);
         game = new Game(board, player1);
 

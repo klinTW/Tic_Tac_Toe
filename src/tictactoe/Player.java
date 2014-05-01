@@ -31,4 +31,12 @@ public class Player {
             return 0;
         }
     }
+
+    public Integer[] playMove(Integer i, Integer[] board) {
+        if (i > 0) {
+            board[i - 1] = 1;
+        }
+
+        return board;
+    }
 }

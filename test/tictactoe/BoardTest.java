@@ -2,59 +2,48 @@ package tictactoe;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.InOrder;
 
-import java.io.PrintStream;
+import java.util.Arrays;
 
-import static org.mockito.Mockito.inOrder;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 public class BoardTest {
 
     private Board testBoard;
-    private PrintStream printStream;
+    private BoardDisplayer displayer;
 
     @Before
     public void setUp() {
-        printStream = mock(PrintStream.class);
-        testBoard = new Board(printStream);
+        displayer = mock(BoardDisplayer.class);
+        testBoard = new Board(displayer);
     }
 
     @Test
-    public void shouldPrintEmptyGridWhenFirstDisplaying() {
-        testBoard.displayBoard();
-        InOrder inOrder = inOrder(printStream);
-        inOrder.verify(printStream).println(" | | ");
-        inOrder.verify(printStream).println("-----");
-        inOrder.verify(printStream).println(" | | ");
-        inOrder.verify(printStream).println("-----");
-        inOrder.verify(printStream).println(" | | ");
+    public void shouldDisplayBoardAtBeginningOfEachTurn() {
+        Player player = mock(Player.class);
+        Integer[] board = new Integer[9];
+        Arrays.fill(board, 0);
+        testBoard.playTurn(player);
+        verify(displayer).displayBoard(board);
     }
 
     @Test
-    public void shouldMarkDownPlayerMoveWhenPlayed() {
-        Player testPlayer = mock(Player.class);
-        InOrder inOrder = inOrder(printStream);
-        testBoard.playMove(testPlayer, 1);
-        testBoard.displayBoard();
-        inOrder.verify(printStream).println("X| | ");
-        inOrder.verify(printStream).println("-----");
-        inOrder.verify(printStream).println(" | | ");
-        inOrder.verify(printStream).println("-----");
-        inOrder.verify(printStream).println(" | | ");
+    public void shouldAskPlayerForMoveDuringEachTurn() {
+        Player player = mock(Player.class);
+        testBoard.playTurn(player);
+        verify(player).askForMove();
     }
 
     @Test
-    public void shouldNotChangeBoardIfInvalidMovePlayed() {
-        Player testPlayer = mock(Player.class);
-        InOrder inOrder = inOrder(printStream);
-        testBoard.playMove(testPlayer, -1);
-        testBoard.displayBoard();
-        inOrder.verify(printStream).println(" | | ");
-        inOrder.verify(printStream).println("-----");
-        inOrder.verify(printStream).println(" | | ");
-        inOrder.verify(printStream).println("-----");
-        inOrder.verify(printStream).println(" | | ");
+    public void shouldAskPlayerToPlayTheirMove() {
+        Player player = mock(Player.class);
+        Integer[] board = new Integer[9];
+        Arrays.fill(board, 0);
+        when(player.askForMove()).thenReturn(1);
+        testBoard.playTurn(player);
+        verify(player).playMove(1, board);
     }
 
 }
