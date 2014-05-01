@@ -23,7 +23,7 @@ public class BoardTest {
     @Test
     public void shouldPrintEmptyGridWhenFirstDisplaying() {
         testBoard.displayBoard();
-        InOrder inOrder = inOrder(printStream, printStream, printStream, printStream, printStream);
+        InOrder inOrder = inOrder(printStream);
         inOrder.verify(printStream).println("   |   |   ");
         inOrder.verify(printStream).println("-----------");
         inOrder.verify(printStream).println("   |   |   ");
