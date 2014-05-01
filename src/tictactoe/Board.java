@@ -40,4 +40,8 @@ public class Board {
         }
         return false;
     }
+
+    public boolean finished() {
+        return false;
+    }
 }
