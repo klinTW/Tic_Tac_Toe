@@ -20,11 +20,11 @@ public class Main {
         printStream = new PrintStream(System.out);
         reader = new BufferedReader(new InputStreamReader(System.in));
         displayer = new BoardDisplayer(printStream);
-        board = new Board(displayer, printStream);
-        player1 = new Player(printStream, reader, playerNumber1);
-        player2 = new Player(printStream, reader, playerNumber2);
+        board = new Board(printStream);
+        player1 = new Player(printStream, reader, playerNumber1, board);
+        player2 = new Player(printStream, reader, playerNumber2, board);
         game = new Game(board, player1, player2);
 
-        game.start();
+        game.play();
     }
 }

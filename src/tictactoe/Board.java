@@ -1,47 +1,33 @@
 package tictactoe;
 
 import java.io.PrintStream;
-import java.util.Arrays;
+import java.util.ArrayList;
 
 public class Board {
 
-    private Integer[] board;
+    private ArrayList<Character> board;
 
-    private BoardDisplayer displayer;
     private java.io.PrintStream printStream;
 
-    public Board(BoardDisplayer displayer, PrintStream printStream) {
-        this.displayer = displayer;
+    public Board(PrintStream printStream) {
         this.printStream = printStream;
-        this.board = new Integer[9];
-        Arrays.fill(board, 0);
-    }
-
-    public void playTurn(Player player) {
-        displayer.displayBoard(board);
-        Integer move = player.askForMove();
-        Integer[] modifiedBoard = player.playMove(move, board);
-        if (intArrayEquals(board, modifiedBoard)) {
-            printStream.println("That move is either already taken or invalid.");
-            playTurn(player);
-        } else {
-            board = modifiedBoard;
+        this.board = new ArrayList<Character>(9);
+        for (int i = 0; i < 10; i++) {
+            board.add(' ');
         }
     }
 
-    public boolean intArrayEquals(Integer[] array1, Integer[] array2) {
-        if (array1.length == array2.length) {
-            for (int i = 0; i < array1.length; i++) {
-                if (!array1[i].equals(array2[i])) {
-                    return false;
-                }
-            }
-            return true;
-        }
-        return false;
+    public void display() {
+        printStream.println(board.get(0) + "|" + board.get(1) + "|" + board.get(2));
+        printStream.println("-----");
+        printStream.println(board.get(3) + "|" + board.get(4) + "|" + board.get(5));
+        printStream.println("-----");
+        printStream.println(board.get(6) + "|" + board.get(7) + "|" + board.get(8));
     }
 
-    public boolean finished() {
-        return false;
+    public void mark(String input) {
+        Integer space = Integer.parseInt(input);
+        board.set(space - 1, 'X');
     }
+
 }

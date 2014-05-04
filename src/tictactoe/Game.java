@@ -12,8 +12,11 @@ public class Game {
         this.player2 = player2;
     }
 
-    public void start() {
-        gameBoard.playTurn(player1);
-        gameBoard.playTurn(player2);
+    public void play() {
+        gameBoard.display();
+        player1.move();
+
+        gameBoard.display();
+
     }
 }
