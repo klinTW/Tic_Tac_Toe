@@ -13,13 +13,11 @@ public class BoardTest {
 
     private Board testBoard;
     private PrintStream printStream;
-    private Player player;
     private Integer[] board, correctBoard;
 
     @Before
     public void setUp() {
         printStream = mock(PrintStream.class);
-        player = mock(Player.class);
         testBoard = new Board(printStream);
 
         board = new Integer[9];
@@ -41,8 +39,8 @@ public class BoardTest {
     }
 
     @Test
-    public void shouldMarkSpaceOnBoardWhenGivenInput() {
-        testBoard.mark("1");
+    public void shouldMarkXOnBoardWhenPlayer1Moves() {
+        testBoard.mark("1", 'X');
         testBoard.display();
         InOrder inOrder = inOrder(printStream);
         inOrder.verify(printStream).println("X| | ");
@@ -51,5 +49,11 @@ public class BoardTest {
         inOrder.verify(printStream).println("-----");
         inOrder.verify(printStream).println(" | | ");
     }
+
+    /*@Test
+    public void shouldMarkOOnBoardWhenPlayer2Moves() {
+        testBoard.mark("2", 'O');
+        testBoard.display();
+    }*/
 
 }

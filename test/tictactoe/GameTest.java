@@ -2,6 +2,7 @@ package tictactoe;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.InOrder;
 
 import static org.mockito.Mockito.*;
 
@@ -25,7 +26,7 @@ public class GameTest {
     @Test
     public void shouldAttemptToDisplayBoard() {
         testGame.play();
-        verify(testBoard).display();
+        verify(testBoard, atLeastOnce()).display();
     }
 
     @Test
@@ -34,14 +35,21 @@ public class GameTest {
         verify(testPlayer1).move();
     }
 
-    /*@Test
+    @Test
     public void shouldRedrawBoardAfterPlayer1Moves() {
         testGame.play();
         InOrder inOrder = inOrder(testBoard, testPlayer1);
+        inOrder.verify(testBoard, times(1)).display();
+        inOrder.verify(testPlayer1, times(1)).move();
+        inOrder.verify(testBoard, times(1)).display();
+    }
+
+    @Test
+    public void shouldAttemptToMakePlayer2MoveAfterPlayer1() {
+        InOrder inOrder = inOrder(testPlayer1, testPlayer2);
+        testGame.play();
         inOrder.verify(testPlayer1).move();
-        inOrder.verify(testBoard).display();
-    }*/
-
-
+        inOrder.verify(testPlayer2).move();
+    }
 
 }

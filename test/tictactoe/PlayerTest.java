@@ -44,7 +44,14 @@ public class PlayerTest {
     public void shouldMakeMoveOnBoardAfterGettingInput() throws IOException {
         when(reader.readLine()).thenReturn("1");
         testPlayer.move();
-        verify(board).mark("1");
+        verify(board).mark("1", 'X');
+    }
+
+    @Test
+    public void shouldMarkAnOOnBoardIfPlayer2() throws IOException {
+        when(reader.readLine()).thenReturn("2");
+        testPlayer2.move();
+        verify(board).mark("2", 'O');
     }
 
 }

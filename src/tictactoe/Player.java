@@ -3,6 +3,7 @@ package tictactoe;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintStream;
+import java.util.ArrayList;
 
 public class Player {
 
@@ -10,12 +11,17 @@ public class Player {
     private BufferedReader reader;
     private Integer playerNumber;
     private Board board;
+    private ArrayList<Character> symbols;
 
     public Player(PrintStream printStream, BufferedReader reader, Integer playerNumber, Board board) {
         this.printStream = printStream;
         this.reader = reader;
         this.playerNumber = playerNumber;
         this.board = board;
+        this.symbols = new ArrayList<Character>();
+        symbols.add(' ');
+        symbols.add('X');
+        symbols.add('O');
     }
 
     public void move() {
@@ -28,7 +34,7 @@ public class Player {
             e.printStackTrace();
         }
 
-        board.mark(input);
+        board.mark(input, symbols.get(playerNumber));
     }
 
 }

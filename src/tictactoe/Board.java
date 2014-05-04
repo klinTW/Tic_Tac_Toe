@@ -25,7 +25,7 @@ public class Board {
         printStream.println(board.get(6) + "|" + board.get(7) + "|" + board.get(8));
     }
 
-    public void mark(String input) {
+    public void mark(String input, char symbol) {
         Integer space = Integer.parseInt(input);
         board.set(space - 1, 'X');
     }

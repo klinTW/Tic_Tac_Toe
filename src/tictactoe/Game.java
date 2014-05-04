@@ -17,6 +17,7 @@ public class Game {
         player1.move();
 
         gameBoard.display();
+        player2.move();
 
     }
 }
